@@ -19,6 +19,10 @@ function App() {
     });
     setItems(newItems);
   };
+
+  const handleRemoveAllItems = () => {
+    setItems([]);
+  };
   return (
     <div className="main-div">
       <div className="child-div">
@@ -52,7 +56,10 @@ function App() {
           })}
         </div>
         <div className="showItems">
-          <button className="btn effect04" data-sm-link-text="Remove All">
+          <button
+            className="btn effect04"
+            data-sm-link-text="Remove All"
+            onClick={handleRemoveAllItems}>
             <span>Check List</span>
           </button>
         </div>
