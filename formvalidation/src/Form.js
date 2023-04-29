@@ -1,7 +1,8 @@
 import React from "react";
 import { GlobalStyle } from "./globalStyle";
 import styled from "styled-components";
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
+import { formyupSchema } from "./formSchema";
 
 const initialValues = {
   name: "",
@@ -10,13 +11,17 @@ const initialValues = {
   confirm_password: "",
 };
 function Form() {
-  const { values, errors, handleChange, handleBlur, handleSubmit } = useFormik({
-    initialValues,
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
+  const { values, errors, handleChange, handleBlur, handleSubmit, touched } =
+    useFormik({
+      initialValues,
+      validationSchema: formyupSchema,
+      onSubmit: (values, action) => {
+        console.log(values);
+        action.resetForm();
+      },
+    });
   // console.log(Formik);
+  // console.log(errors);
   return (
     <>
       <GlobalStyle />
@@ -41,6 +46,9 @@ function Form() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.name && touched.name ? (
+                      <p className="form-error">{errors.name}</p>
+                    ) : null}
                   </div>
                   <div className="input-block">
                     <label htmlFor="email" className="input-label">
@@ -56,6 +64,9 @@ function Form() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.email && touched.email ? (
+                      <p className="form-error">{errors.email}</p>
+                    ) : null}
                   </div>
                   <div className="input-block">
                     <label htmlFor="password" className="input-label">
@@ -71,6 +82,9 @@ function Form() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.password && touched.password ? (
+                      <p className="form-error">{errors.password}</p>
+                    ) : null}
                   </div>
                   <div className="input-block">
                     <label htmlFor="confirm_password" className="input-label">
@@ -86,6 +100,9 @@ function Form() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    {errors.confirm_password && touched.confirm_password ? (
+                      <p className="form-error">{errors.confirm_password}</p>
+                    ) : null}
                   </div>
                   <div className="modal-buttons">
                     <a href="#404" className="">
