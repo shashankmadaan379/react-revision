@@ -4,6 +4,21 @@ import todologo from "./images/todo.svg";
 import { AiOutlinePlus, AiOutlineDelete } from "react-icons/ai";
 function App() {
   const [inputText, setInputText] = useState("");
+  const [items, setItems] = useState([]);
+  const handleAddItem = () => {
+    if (!inputText) {
+    } else {
+      setItems([...items, inputText]);
+      setInputText("");
+    }
+  };
+
+  const handleDeleteItems = (idx) => {
+    const newItems = items.filter((elements, index) => {
+      return index !== idx;
+    });
+    setItems(newItems);
+  };
   return (
     <div className="main-div">
       <div className="child-div">
@@ -18,13 +33,23 @@ function App() {
             value={inputText}
             onChange={(event) => setInputText(event.target.value)}
           />
-          <AiOutlinePlus className="ai ai-plus add-btn" />
+          <AiOutlinePlus
+            className="ai ai-plus add-btn"
+            onClick={handleAddItem}
+          />
         </div>
         <div className="showItems">
-          <div className="eachItem">
-            <h3>mango</h3>
-            <AiOutlineDelete className="fa-edit fa-trash-alt add-btn" />
-          </div>
+          {items.map((item, index) => {
+            return (
+              <div className="eachItem" key={index}>
+                <h3>{item}</h3>
+                <AiOutlineDelete
+                  className="fa-edit fa-trash-alt add-btn"
+                  onClick={() => handleDeleteItems(index)}
+                />
+              </div>
+            );
+          })}
         </div>
         <div className="showItems">
           <button className="btn effect04" data-sm-link-text="Remove All">
