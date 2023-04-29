@@ -1,7 +1,22 @@
 import React from "react";
 import { GlobalStyle } from "./globalStyle";
 import styled from "styled-components";
+import { Formik, useFormik } from "formik";
+
+const initialValues = {
+  name: "",
+  email: "",
+  password: "",
+  confirm_password: "",
+};
 function Form() {
+  const { values, errors, handleChange, handleBlur, handleSubmit } = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+  // console.log(Formik);
   return (
     <>
       <GlobalStyle />
@@ -11,7 +26,7 @@ function Form() {
             <div className="modal-container">
               <div className="modal-left">
                 <h1 className="modal-title">Welcome!</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="input-block">
                     <label htmlFor="name" className="input-label">
                       Name
@@ -22,6 +37,9 @@ function Form() {
                       name="name"
                       placeholder="Name"
                       id="name"
+                      value={values.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="input-block">
@@ -34,6 +52,9 @@ function Form() {
                       name="email"
                       placeholder="Email"
                       id="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="input-block">
@@ -46,6 +67,24 @@ function Form() {
                       name="password"
                       placeholder="Password"
                       id="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="input-block">
+                    <label htmlFor="confirm_password" className="input-label">
+                      Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      autoComplete="off"
+                      name="confirm_password"
+                      placeholder="Confirm Password"
+                      id="confirm_password"
+                      value={values.confirm_password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="modal-buttons">
