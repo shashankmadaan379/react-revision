@@ -11,8 +11,8 @@ export default class Search extends Component {
   };
 
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value }, () => {
-      axios
+    this.setState({ [e.target.name]: e.target.value }, async () => {
+      await axios
         .get(
           `${this.state.apiUrl}/?key=${this.state.apiKey}&q=${this.state.inputText}&image_type=photo&safesearch=true`
         )
