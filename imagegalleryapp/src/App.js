@@ -1,5 +1,11 @@
+import Search from "./components/search/Search";
+
 function App() {
-  return <div>Hello</div>;
+  return (
+    <div>
+      <Search />
+    </div>
+  );
 }
 
 export default App;
